@@ -23,7 +23,7 @@ import {
 } from "@/components/agency/Collage";
 
 const CONTACT_EMAIL = "simransidhu1202@gmail.com";
-const WEB3FORMS_KEY = "9e06f7e1-92e4-45a6-8732-5a84b4f82367";
+const WEB3FORMS_KEY = "e0dd6a60-c841-4ac9-8e27-654da7dca09a";
 
 const SERVICES = [
   { slug: "branding", label: "Brand & Identity" },
