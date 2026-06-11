@@ -1,5 +1,4 @@
 import { useState } from "react";
-import axios from "axios";
 import { motion } from "framer-motion";
 import { ArrowUpRight, CheckCircle2, AlertCircle, Mail, Coffee, MapPin, Instagram } from "lucide-react";
 import { Input } from "@/components/ui/input";
@@ -23,7 +22,8 @@ import {
   Sparkle,
 } from "@/components/agency/Collage";
 
-const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
+const CONTACT_EMAIL = "simransidhu1202@gmail.com";
+const WEB3FORMS_KEY = "9e06f7e1-92e4-45a6-8732-5a84b4f82367";
 
 const SERVICES = [
   { slug: "branding", label: "Brand & Identity" },
@@ -36,8 +36,8 @@ const SERVICES = [
 
 const BUDGETS = [
   "Under $5k",
-  "$5k – $15k",
-  "$15k – $40k",
+  "$5k \u2013 $15k",
+  "$15k \u2013 $40k",
   "$40k+",
   "Not sure yet",
 ];
@@ -45,7 +45,7 @@ const BUDGETS = [
 const TIMELINES = [
   "ASAP",
   "Within a month",
-  "1 – 3 months",
+  "1 \u2013 3 months",
   "3+ months",
   "Just exploring",
 ];
@@ -82,42 +82,50 @@ export default function AgencyContact() {
     setLoading(true);
     try {
       const payload = {
-        ...form,
-        company: form.company || null,
-        phone: form.phone || null,
-        budget: form.budget || null,
-        timeline: form.timeline || null,
-        services: form.services.length ? form.services : null,
+        access_key: WEB3FORMS_KEY,
+        subject: `New enquiry from ${form.name}`,
+        from_name: "Honeyline Website",
+        name: form.name,
+        email: form.email,
+        company: form.company || "Not provided",
+        phone: form.phone || "Not provided",
+        budget: form.budget || "Not provided",
+        timeline: form.timeline || "Not provided",
+        services: form.services.length ? form.services.join(", ") : "Not specified",
+        message: form.message,
       };
-      await axios.post(`${API}/agency/leads`, payload);
-      setStatus({
-        type: "success",
-        msg: "Thanks — we’ve got your note. Simran will be in touch within 1 business day, usually with a few questions and a calendar link.",
+
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
       });
-      setForm({
-        name: "",
-        email: "",
-        company: "",
-        phone: "",
-        budget: "",
-        timeline: "",
-        services: [],
-        message: "",
-      });
-    } catch (err) {
-      const raw = err?.response?.data?.detail;
-      let detail;
-      if (Array.isArray(raw)) {
-        detail = raw.map((e) => e?.msg || String(e)).join(", ");
-      } else if (raw && typeof raw === "object") {
-        detail = raw.msg || JSON.stringify(raw);
-      } else if (typeof raw === "string") {
-        detail = raw;
+
+      const data = await res.json();
+
+      if (data.success) {
+        setStatus({
+          type: "success",
+          msg: "Thanks \u2014 we\u2019ve got your note. Simran will be in touch within 1 business day, usually with a few questions and a calendar link.",
+        });
+        setForm({
+          name: "",
+          email: "",
+          company: "",
+          phone: "",
+          budget: "",
+          timeline: "",
+          services: [],
+          message: "",
+        });
       } else {
-        detail =
-          "Something went sideways. Please email us directly at simransidhu1202@gmail.com.";
+        throw new Error(data.message || "Submission failed");
       }
-      setStatus({ type: "error", msg: detail });
+    } catch (err) {
+      setStatus({
+        type: "error",
+        msg: "Something went sideways. Please email us directly at simransidhu1202@gmail.com.",
+      });
     } finally {
       setLoading(false);
     }
@@ -141,7 +149,7 @@ export default function AgencyContact() {
               </span>
             </div>
             <h1 className="font-display text-[48px] sm:text-[72px] md:text-[120px] leading-[0.93] tracking-tight">
-              Let{`’`}s grab a{" "}
+              Let{`'`}s grab a{" "}
               <span className="relative inline-block italic font-light">
                 flat white
                 <HandDrawnUnderline color="#C89932" thickness={4} className="absolute -bottom-3 left-0 w-full h-[14px]" />
@@ -150,7 +158,7 @@ export default function AgencyContact() {
               and talk <span className="italic font-light">growth</span>.
             </h1>
             <p className="mt-10 max-w-2xl font-body text-[16px] md:text-[19px] leading-[1.6] text-[#1A1814]/85">
-              Tell us a little about your business and where you want to take it. Simran replies to every enquiry personally — usually within one Melbourne business day.
+              Tell us a little about your business and where you want to take it. Simran replies to every enquiry personally &mdash; usually within one Melbourne business day.
             </p>
           </div>
         </div>
@@ -175,12 +183,12 @@ export default function AgencyContact() {
                 </span>
               </a>
               <p className="mt-4 font-body text-[14px] leading-[1.65] text-[#1A1814]/75">
-                Prefer email? Skip the form — Simran reads every message herself.
+                Prefer email? Skip the form &mdash; Simran reads every message herself.
               </p>
             </div>
 
             <div className="relative border border-[#1A1814]/20 p-7 md:p-8 hl-cream"
-                 style={{ transform: "rotate(-1deg)" }}>
+              style={{ transform: "rotate(-1deg)" }}>
               <Thumbtack className="-top-2 left-6" />
               <WashiTape tone="gold" rotate={-7} width={90} className="-top-3 right-8" />
               <div className="font-body text-[11px] tracking-[0.3em] uppercase text-[#1A1814]/70 mb-3">
@@ -191,12 +199,12 @@ export default function AgencyContact() {
                 <span>Remote-first, working across Melbourne, VIC.</span>
               </p>
               <p className="mt-4 font-body text-[14px] leading-[1.65] text-[#1A1814]/75">
-                We work with clients over video calls and async — fast, focused, and on your schedule.
+                We work with clients over video calls and async &mdash; fast, focused, and on your schedule.
               </p>
             </div>
 
             <div className="relative border border-[#1A1814]/20 p-7 md:p-8 hl-cream"
-                 style={{ transform: "rotate(0.8deg)" }}>
+              style={{ transform: "rotate(0.8deg)" }}>
               <Thumbtack className="-top-2 right-6" />
               <div className="font-body text-[11px] tracking-[0.3em] uppercase text-[#1A1814]/70 mb-3">
                 Social
@@ -222,7 +230,7 @@ export default function AgencyContact() {
             </div>
 
             <div className="relative hl-ink p-7 md:p-8 text-[#F2E2A4]"
-                 style={{ transform: "rotate(-1.2deg)" }}>
+              style={{ transform: "rotate(-1.2deg)" }}>
               <WashiTape tone="gold" rotate={-10} width={140} className="-top-3 left-1/2 -translate-x-1/2" />
               <StickerBadge tone="gold" rotate={-12} size="md" className="!static absolute -top-4 -right-3">
                 On the house
@@ -233,7 +241,7 @@ export default function AgencyContact() {
               <p className="font-display text-[22px] md:text-[26px] leading-[1.2] tracking-tight">
                 The first chat is on us.
                 <br />
-                <em className="italic font-light">Let{`’`}s build something worth talking about.</em>
+                <em className="italic font-light">Let{`'`}s build something worth talking about.</em>
               </p>
               <div className="mt-6 flex justify-end">
                 <PostmarkStamp text="POSTED FROM MELBOURNE" date="MMXXVI" rotate={-7} />
@@ -321,11 +329,10 @@ export default function AgencyContact() {
                           key={s.slug}
                           data-testid={HL_CONTACT.serviceChip(s.slug)}
                           onClick={() => toggleService(s.slug)}
-                          className={`px-4 py-2 font-body text-[12px] tracking-[0.16em] uppercase border transition-colors ${
-                            active
-                              ? "bg-[#1A1814] text-[#F2E2A4] border-[#1A1814]"
-                              : "border-[#1A1814]/30 text-[#1A1814] hover:border-[#1A1814]"
-                          }`}
+                          className={`px-4 py-2 font-body text-[12px] tracking-[0.16em] uppercase border transition-colors ${active
+                            ? "bg-[#1A1814] text-[#F2E2A4] border-[#1A1814]"
+                            : "border-[#1A1814]/30 text-[#1A1814] hover:border-[#1A1814]"
+                            }`}
                         >
                           {s.label}
                         </button>
@@ -391,14 +398,14 @@ export default function AgencyContact() {
                     value={form.message}
                     onChange={(e) => set("message", e.target.value)}
                     rows={5}
-                    placeholder="A few sentences about your business, what’s working, what’s not, and what you’d love to achieve in the next 90 days."
+                    placeholder="A few sentences about your business, what's working, what's not, and what you'd love to achieve in the next 90 days."
                     className={`${inputCls} resize-none`}
                   />
                 </div>
 
                 <div className="md:col-span-2 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-5 pt-3">
                   <p className="font-body text-[11px] text-[#1A1814]/65 tracking-wide max-w-sm">
-                    By submitting, you agree we may contact you about your enquiry. We don{`’`}t share your details. Ever.
+                    By submitting, you agree we may contact you about your enquiry. We don{`'`}t share your details. Ever.
                   </p>
                   <button
                     type="submit"
@@ -406,7 +413,7 @@ export default function AgencyContact() {
                     disabled={loading}
                     className="hl-btn-ink inline-flex items-center justify-center gap-2 px-8 py-4 font-body text-[12px] tracking-[0.22em] uppercase disabled:opacity-60 disabled:cursor-not-allowed"
                   >
-                    {loading ? "Sending…" : "Send Enquiry"}
+                    {loading ? "Sending\u2026" : "Send Enquiry"}
                     <ArrowUpRight size={16} strokeWidth={1.7} />
                   </button>
                 </div>

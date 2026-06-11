@@ -21,7 +21,9 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
-html, body, #root {
+html,
+body,
+#root {
     background: var(--bg-primary);
     color: var(--text);
 }
@@ -45,31 +47,42 @@ body {
 
 /* ============== HONEYLINE STUDIO (Agency) tokens ============== */
 .honeyline {
-    --hl-bg: #F2E2A4;          /* warm pastel custard */
-    --hl-cream: #FAF7EE;       /* soft cream */
-    --hl-ink: #1A1814;         /* deep charcoal text */
-    --hl-ink-dim: #6B6657;     /* muted charcoal */
-    --hl-line: #1A1814;        /* hairline color */
+    --hl-bg: #F2E2A4;
+    /* warm pastel custard */
+    --hl-cream: #FAF7EE;
+    /* soft cream */
+    --hl-ink: #1A1814;
+    /* deep charcoal text */
+    --hl-ink-dim: #6B6657;
+    /* muted charcoal */
+    --hl-line: #1A1814;
+    /* hairline color */
     --hl-line-soft: rgba(26, 24, 20, 0.14);
-    --hl-accent: #C7A646;      /* amber accent */
+    --hl-accent: #C7A646;
+    /* amber accent */
     background: var(--hl-bg);
     color: var(--hl-ink);
 }
+
 .honeyline .hl-cream {
     background: var(--hl-cream);
 }
+
 .honeyline .hl-ink {
     background: var(--hl-ink);
     color: var(--hl-cream);
 }
+
 .honeyline .font-display {
     font-family: "Fraunces", "Cormorant Garamond", Georgia, serif;
     font-feature-settings: "ss01", "ss02", "ss04";
 }
+
 .honeyline .font-body {
     font-family: "DM Sans", -apple-system, BlinkMacSystemFont, sans-serif;
     font-feature-settings: "ss01";
 }
+
 .honeyline ::selection {
     background: var(--hl-ink);
     color: var(--hl-bg);
@@ -87,16 +100,19 @@ body {
     border: 1px solid var(--hl-ink);
     transition: transform 0.25s ease, background 0.25s ease, color 0.25s ease;
 }
+
 .honeyline .hl-btn-ink:hover {
     background: var(--hl-bg);
     color: var(--hl-ink);
 }
+
 .honeyline .hl-btn-ghost {
     background: transparent;
     color: var(--hl-ink);
     border: 1px solid var(--hl-ink);
     transition: background 0.25s ease, color 0.25s ease;
 }
+
 .honeyline .hl-btn-ghost:hover {
     background: var(--hl-ink);
     color: var(--hl-bg);
@@ -107,6 +123,7 @@ body {
     position: relative;
     display: inline-block;
 }
+
 .honeyline .hl-link::after {
     content: "";
     position: absolute;
@@ -119,6 +136,7 @@ body {
     transform-origin: right;
     transition: transform 0.4s cubic-bezier(0.6, 0, 0.2, 1);
 }
+
 .honeyline .hl-link:hover::after {
     transform: scaleX(0);
     transform-origin: left;
@@ -141,9 +159,11 @@ body {
     width: 10px;
     height: 10px;
 }
+
 .honeyline ::-webkit-scrollbar-track {
     background: var(--hl-cream);
 }
+
 .honeyline ::-webkit-scrollbar-thumb {
     background: var(--hl-ink);
 }
@@ -159,6 +179,7 @@ body {
 
 /* ============== Custom cursor (desktop only) ============== */
 @media (pointer: fine) {
+
     .has-custom-cursor,
     .has-custom-cursor * {
         cursor: none !important;
@@ -208,6 +229,7 @@ body {
 }
 
 @media (pointer: coarse) {
+
     .hl-cursor-dot,
     .hl-cursor-ring {
         display: none;
@@ -216,9 +238,15 @@ body {
 
 /* ============== Slow spin ============== */
 @keyframes hl-spin-slow {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
 }
+
 .hl-spin-slow {
     animation: hl-spin-slow 22s linear infinite;
     transform-origin: center;
@@ -226,13 +254,31 @@ body {
 
 /* Pinterest collage helpers */
 @keyframes hl-pulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50%      { opacity: 0.4; transform: scale(0.85); }
+
+    0%,
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.4;
+        transform: scale(0.85);
+    }
 }
+
 @keyframes hl-float-soft {
-    0%, 100% { transform: translateY(0) rotate(var(--hl-rot, 0deg)); }
-    50%      { transform: translateY(-6px) rotate(calc(var(--hl-rot, 0deg) + 1deg)); }
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(var(--hl-rot, 0deg));
+    }
+
+    50% {
+        transform: translateY(-6px) rotate(calc(var(--hl-rot, 0deg) + 1deg));
+    }
 }
+
 .honeyline .hl-float {
     animation: hl-float-soft 6.5s ease-in-out infinite;
 }
@@ -240,20 +286,18 @@ body {
 /* Notebook-rule field (used for forms) */
 .honeyline .hl-notebook {
     background-image:
-        repeating-linear-gradient(
-            transparent 0,
+        repeating-linear-gradient(transparent 0,
             transparent 33px,
             rgba(26, 24, 20, 0.10) 33px,
-            rgba(26, 24, 20, 0.10) 34px
-        );
+            rgba(26, 24, 20, 0.10) 34px);
 }
 
 /* Subtle paper-grain card for polaroid */
 .honeyline .hl-paper {
     background-color: #FAF7EE;
     background-image:
-        radial-gradient(rgba(26,24,20,0.06) 1px, transparent 1px),
-        radial-gradient(rgba(26,24,20,0.04) 1px, transparent 1px);
+        radial-gradient(rgba(26, 24, 20, 0.06) 1px, transparent 1px),
+        radial-gradient(rgba(26, 24, 20, 0.04) 1px, transparent 1px);
     background-size: 22px 22px, 11px 11px;
     background-position: 0 0, 6px 6px;
 }
@@ -272,31 +316,20 @@ body {
     pointer-events: none;
     z-index: 60;
     object-fit: cover;
-    border: 1px solid rgba(26,24,20,0.18);
+    border: 1px solid rgba(26, 24, 20, 0.18);
     transform: translate(-50%, -50%) scale(0.94);
     opacity: 0;
-    transition: opacity 0.3s ease, transform 0.4s cubic-bezier(0.4,0,0.2,1);
-    box-shadow: 0 30px 60px -20px rgba(26,24,20,0.4);
+    transition: opacity 0.3s ease, transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 30px 60px -20px rgba(26, 24, 20, 0.4);
     background: #FAF7EE;
 }
+
 .honeyline .hl-preview.is-active {
     opacity: 1;
     transform: translate(-50%, -50%) scale(1);
 }
 
-/* Hide Emergent badge — inline `display: !important` can't be overridden,
-   so neutralise via size/visibility (which are not set inline as !important). */
-#emergent-badge {
-    visibility: hidden !important;
-    opacity: 0 !important;
-    pointer-events: none !important;
-    width: 0 !important;
-    height: 0 !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    overflow: hidden !important;
-    clip-path: inset(50%) !important;
-}
+
 
 /* Grain overlay */
 .grain::before {
@@ -321,22 +354,31 @@ body {
     width: 8px;
     height: 8px;
 }
+
 ::-webkit-scrollbar-track {
     background: var(--bg-primary);
 }
+
 ::-webkit-scrollbar-thumb {
     background: var(--border-subtle);
     border-radius: 0;
 }
+
 ::-webkit-scrollbar-thumb:hover {
     background: var(--brand);
 }
 
 /* Marquee */
 @keyframes marquee {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
 }
+
 .marquee-track {
     animation: marquee 40s linear infinite;
 }
@@ -345,6 +387,7 @@ body {
 .link-underline {
     position: relative;
 }
+
 .link-underline::after {
     content: "";
     position: absolute;
@@ -355,6 +398,7 @@ body {
     background: currentColor;
     transition: width 0.35s ease;
 }
+
 .link-underline:hover::after {
     width: 100%;
 }
@@ -366,15 +410,18 @@ body {
     border: 1px solid var(--brand);
     transition: background 0.25s ease, transform 0.2s ease;
 }
+
 .btn-primary:hover {
     background: var(--brand-hover);
 }
+
 .btn-ghost {
     background: transparent;
     color: var(--text);
     border: 1px solid rgba(247, 247, 242, 0.25);
     transition: border-color 0.25s ease, color 0.25s ease, background 0.25s ease;
 }
+
 .btn-ghost:hover {
     border-color: var(--gold);
     color: var(--gold);
@@ -408,6 +455,7 @@ body {
 .hero-photo-frame {
     position: relative;
 }
+
 .hero-photo-frame::before {
     content: "";
     position: absolute;
@@ -445,6 +493,7 @@ body {
     * {
         @apply border-border;
     }
+
     body {
         @apply bg-background text-foreground;
     }
