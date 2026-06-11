@@ -1,0 +1,451 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --bg-primary: #0A0D0B;
+    --bg-secondary: #101613;
+    --surface: #161E1A;
+    --brand: #138A36;
+    --brand-hover: #2E7D32;
+    --teal: #0E3B43;
+    --gold: #D4AF37;
+    --text: #F7F7F2;
+    --text-dim: #9CAEA5;
+    --border-subtle: #1F2D26;
+    --border-gold: rgba(212, 175, 55, 0.3);
+}
+
+* {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+html, body, #root {
+    background: var(--bg-primary);
+    color: var(--text);
+}
+
+body {
+    margin: 0;
+    font-family: "Manrope", -apple-system, BlinkMacSystemFont, sans-serif;
+    font-feature-settings: "ss01", "cv11";
+    background: var(--bg-primary);
+    color: var(--text);
+}
+
+.font-serif {
+    font-family: "Cormorant Garamond", "Playfair Display", Georgia, serif;
+    font-feature-settings: "liga", "dlig";
+}
+
+.font-sans {
+    font-family: "Manrope", -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* ============== HONEYLINE STUDIO (Agency) tokens ============== */
+.honeyline {
+    --hl-bg: #F2E2A4;          /* warm pastel custard */
+    --hl-cream: #FAF7EE;       /* soft cream */
+    --hl-ink: #1A1814;         /* deep charcoal text */
+    --hl-ink-dim: #6B6657;     /* muted charcoal */
+    --hl-line: #1A1814;        /* hairline color */
+    --hl-line-soft: rgba(26, 24, 20, 0.14);
+    --hl-accent: #C7A646;      /* amber accent */
+    background: var(--hl-bg);
+    color: var(--hl-ink);
+}
+.honeyline .hl-cream {
+    background: var(--hl-cream);
+}
+.honeyline .hl-ink {
+    background: var(--hl-ink);
+    color: var(--hl-cream);
+}
+.honeyline .font-display {
+    font-family: "Fraunces", "Cormorant Garamond", Georgia, serif;
+    font-feature-settings: "ss01", "ss02", "ss04";
+}
+.honeyline .font-body {
+    font-family: "DM Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+    font-feature-settings: "ss01";
+}
+.honeyline ::selection {
+    background: var(--hl-ink);
+    color: var(--hl-bg);
+}
+
+/* Marquee for agency */
+.honeyline .hl-marquee {
+    animation: marquee 36s linear infinite;
+}
+
+/* Agency button */
+.honeyline .hl-btn-ink {
+    background: var(--hl-ink);
+    color: var(--hl-bg);
+    border: 1px solid var(--hl-ink);
+    transition: transform 0.25s ease, background 0.25s ease, color 0.25s ease;
+}
+.honeyline .hl-btn-ink:hover {
+    background: var(--hl-bg);
+    color: var(--hl-ink);
+}
+.honeyline .hl-btn-ghost {
+    background: transparent;
+    color: var(--hl-ink);
+    border: 1px solid var(--hl-ink);
+    transition: background 0.25s ease, color 0.25s ease;
+}
+.honeyline .hl-btn-ghost:hover {
+    background: var(--hl-ink);
+    color: var(--hl-bg);
+}
+
+/* Hairline link */
+.honeyline .hl-link {
+    position: relative;
+    display: inline-block;
+}
+.honeyline .hl-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -3px;
+    width: 100%;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(1);
+    transform-origin: right;
+    transition: transform 0.4s cubic-bezier(0.6, 0, 0.2, 1);
+}
+.honeyline .hl-link:hover::after {
+    transform: scaleX(0);
+    transform-origin: left;
+}
+
+/* Honeyline grain overlay (lighter) */
+.honeyline-grain::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 50;
+    opacity: 0.14;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.55 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+
+/* Honeyline scrollbar */
+.honeyline ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+.honeyline ::-webkit-scrollbar-track {
+    background: var(--hl-cream);
+}
+.honeyline ::-webkit-scrollbar-thumb {
+    background: var(--hl-ink);
+}
+
+/* Service number */
+.honeyline .hl-num {
+    font-family: "Fraunces", Georgia, serif;
+    font-style: italic;
+    font-weight: 300;
+    color: var(--hl-ink);
+    opacity: 0.85;
+}
+
+/* ============== Custom cursor (desktop only) ============== */
+@media (pointer: fine) {
+    .has-custom-cursor,
+    .has-custom-cursor * {
+        cursor: none !important;
+    }
+}
+
+.hl-cursor-dot,
+.hl-cursor-ring {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 200;
+    will-change: transform;
+}
+
+.hl-cursor-dot {
+    width: 8px;
+    height: 8px;
+    background: #1A1814;
+    border-radius: 50%;
+    mix-blend-mode: difference;
+}
+
+.hl-cursor-ring {
+    width: 36px;
+    height: 36px;
+    border: 1.5px solid #1A1814;
+    border-radius: 50%;
+    transition: width 0.25s ease, height 0.25s ease, border-color 0.25s ease, background 0.25s ease, transform 0s;
+    mix-blend-mode: difference;
+}
+
+.hl-cursor-ring.is-link {
+    width: 64px;
+    height: 64px;
+    background: #1A1814;
+    border-color: transparent;
+}
+
+.hl-cursor-ring.is-text {
+    width: 2px;
+    height: 28px;
+    border-radius: 0;
+    background: #1A1814;
+    border: none;
+}
+
+@media (pointer: coarse) {
+    .hl-cursor-dot,
+    .hl-cursor-ring {
+        display: none;
+    }
+}
+
+/* ============== Slow spin ============== */
+@keyframes hl-spin-slow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+.hl-spin-slow {
+    animation: hl-spin-slow 22s linear infinite;
+    transform-origin: center;
+}
+
+/* Pinterest collage helpers */
+@keyframes hl-pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50%      { opacity: 0.4; transform: scale(0.85); }
+}
+@keyframes hl-float-soft {
+    0%, 100% { transform: translateY(0) rotate(var(--hl-rot, 0deg)); }
+    50%      { transform: translateY(-6px) rotate(calc(var(--hl-rot, 0deg) + 1deg)); }
+}
+.honeyline .hl-float {
+    animation: hl-float-soft 6.5s ease-in-out infinite;
+}
+
+/* Notebook-rule field (used for forms) */
+.honeyline .hl-notebook {
+    background-image:
+        repeating-linear-gradient(
+            transparent 0,
+            transparent 33px,
+            rgba(26, 24, 20, 0.10) 33px,
+            rgba(26, 24, 20, 0.10) 34px
+        );
+}
+
+/* Subtle paper-grain card for polaroid */
+.honeyline .hl-paper {
+    background-color: #FAF7EE;
+    background-image:
+        radial-gradient(rgba(26,24,20,0.06) 1px, transparent 1px),
+        radial-gradient(rgba(26,24,20,0.04) 1px, transparent 1px);
+    background-size: 22px 22px, 11px 11px;
+    background-position: 0 0, 6px 6px;
+}
+
+/* Sticky pillar wrapper */
+.honeyline .hl-pillar-sticky {
+    position: sticky;
+    top: 110px;
+}
+
+/* Hover image preview */
+.honeyline .hl-preview {
+    position: fixed;
+    width: 320px;
+    height: 220px;
+    pointer-events: none;
+    z-index: 60;
+    object-fit: cover;
+    border: 1px solid rgba(26,24,20,0.18);
+    transform: translate(-50%, -50%) scale(0.94);
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.4s cubic-bezier(0.4,0,0.2,1);
+    box-shadow: 0 30px 60px -20px rgba(26,24,20,0.4);
+    background: #FAF7EE;
+}
+.honeyline .hl-preview.is-active {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+/* Hide Emergent badge — inline `display: !important` can't be overridden,
+   so neutralise via size/visibility (which are not set inline as !important). */
+#emergent-badge {
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    width: 0 !important;
+    height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow: hidden !important;
+    clip-path: inset(50%) !important;
+}
+
+/* Grain overlay */
+.grain::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 50;
+    opacity: 0.18;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.6 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+
+/* Selection */
+::selection {
+    background: var(--brand);
+    color: var(--text);
+}
+
+/* Scrollbar (dark) */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+::-webkit-scrollbar-track {
+    background: var(--bg-primary);
+}
+::-webkit-scrollbar-thumb {
+    background: var(--border-subtle);
+    border-radius: 0;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--brand);
+}
+
+/* Marquee */
+@keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+.marquee-track {
+    animation: marquee 40s linear infinite;
+}
+
+/* Subtle line link */
+.link-underline {
+    position: relative;
+}
+.link-underline::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    width: 0;
+    height: 1px;
+    background: currentColor;
+    transition: width 0.35s ease;
+}
+.link-underline:hover::after {
+    width: 100%;
+}
+
+/* CTA Button base */
+.btn-primary {
+    background: var(--brand);
+    color: #fff;
+    border: 1px solid var(--brand);
+    transition: background 0.25s ease, transform 0.2s ease;
+}
+.btn-primary:hover {
+    background: var(--brand-hover);
+}
+.btn-ghost {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid rgba(247, 247, 242, 0.25);
+    transition: border-color 0.25s ease, color 0.25s ease, background 0.25s ease;
+}
+.btn-ghost:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+}
+
+/* Tag pill */
+.diet-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-family: "Manrope", sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 2px 6px;
+    border: 1px solid currentColor;
+    border-radius: 2px;
+    line-height: 1;
+}
+
+/* Section divider gold */
+.divider-gold {
+    display: inline-block;
+    width: 40px;
+    height: 1px;
+    background: var(--gold);
+    vertical-align: middle;
+}
+
+/* Vertical line for hero */
+.hero-photo-frame {
+    position: relative;
+}
+.hero-photo-frame::before {
+    content: "";
+    position: absolute;
+    inset: 12px;
+    border: 1px solid var(--border-gold);
+    pointer-events: none;
+}
+
+@layer base {
+    :root {
+        --background: 150 14% 5%;
+        --foreground: 60 14% 95%;
+        --card: 150 14% 7%;
+        --card-foreground: 60 14% 95%;
+        --popover: 150 14% 5%;
+        --popover-foreground: 60 14% 95%;
+        --primary: 138 75% 31%;
+        --primary-foreground: 60 14% 95%;
+        --secondary: 150 14% 10%;
+        --secondary-foreground: 60 14% 95%;
+        --muted: 150 14% 10%;
+        --muted-foreground: 150 10% 65%;
+        --accent: 188 65% 16%;
+        --accent-foreground: 60 14% 95%;
+        --destructive: 0 70% 45%;
+        --destructive-foreground: 60 14% 95%;
+        --border: 150 14% 14%;
+        --input: 150 14% 12%;
+        --ring: 138 75% 31%;
+        --radius: 0.25rem;
+    }
+}
+
+@layer base {
+    * {
+        @apply border-border;
+    }
+    body {
+        @apply bg-background text-foreground;
+    }
+}
