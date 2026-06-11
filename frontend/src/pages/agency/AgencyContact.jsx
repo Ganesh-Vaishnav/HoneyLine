@@ -25,6 +25,7 @@ import {
 const CONTACT_EMAIL = "simransidhu1202@gmail.com";
 const WEB3FORMS_KEY = "e0dd6a60-c841-4ac9-8e27-654da7dca09a";
 
+
 const SERVICES = [
   { slug: "branding", label: "Brand & Identity" },
   { slug: "web", label: "Web Design" },
