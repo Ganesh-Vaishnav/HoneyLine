@@ -85,9 +85,11 @@ export const RotatingStamp = ({
   innerText = "★",
 }) => {
   const radius = size / 2;
+  const padding = 10;
+  const svgSize = size + padding * 2;
   return (
     <div className={`relative ${className}`} style={{ width: size, height: size }} aria-hidden>
-      <svg viewBox={`0 0 ${size} ${size}`} className="hl-spin-slow w-full h-full">
+      <svg viewBox={`${-padding} ${-padding} ${svgSize} ${svgSize}`} className="hl-spin-slow w-full h-full overflow-visible">
         <defs>
           <path
             id="hl-stamp-circle"

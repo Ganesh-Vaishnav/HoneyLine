@@ -33,7 +33,7 @@ const SHOWREEL = [
     title: "Inside the Edit",
     label: "Reel · 01",
     body: "A week behind the lens at Honeyline — shooting reels, scripting copy, and shaping campaigns for Melbourne small businesses.",
-    video: "https://assets.mixkit.co/videos/5500/5500-720.mp4",
+    video: "/intro/IMG_8418.MOV",
     poster: "/posters/showreel-desk.jpg",
     rotate: "-1.5deg",
     tag: "Content Studio",
@@ -43,7 +43,7 @@ const SHOWREEL = [
     title: "Social, on the Street",
     label: "Reel · 02",
     body: "Founder-led content, captured the way real people scroll — vertical, raw, and on-brand.",
-    video: "https://videos.pexels.com/video-files/855574/855574-hd_1920_1080_25fps.mp4",
+    video: "/intro/IMG_8509.MOV.mp4",
     poster: "/posters/showreel-phone.jpg",
     rotate: "2deg",
     tag: "On Location",
@@ -132,35 +132,6 @@ export default function AgencyHome() {
     <div className="bg-[#F2E2A4] text-[#1A1814] overflow-hidden">
       {/* ============== HERO ============== */}
       <section ref={heroRef} className="relative min-h-[100vh] flex items-end pt-32 pb-12 md:pb-20 overflow-hidden">
-        {/* Cinematic background video */}
-        <VideoLoop
-          testId={HL_HOME.heroVideo}
-          src={HERO_VIDEO}
-          poster={HERO_POSTER}
-          className="absolute inset-0 z-0 opacity-40"
-          overlay={
-            <>
-              {/* warm brand wash — keeps pastel-yellow dominant */}
-              <div className="absolute inset-0 bg-[#F2E2A4]/70" />
-              {/* fade-to-yellow from the right so headline stays crisp */}
-              <div
-                className="absolute inset-0 pointer-events-none"
-                style={{
-                  background:
-                    "linear-gradient(90deg, rgba(242,226,164,0.10) 0%, rgba(242,226,164,0.55) 45%, rgba(242,226,164,0.92) 75%, #F2E2A4 100%)",
-                }}
-              />
-              {/* subtle vignette */}
-              <div
-                className="absolute inset-0 pointer-events-none"
-                style={{
-                  background:
-                    "radial-gradient(110% 80% at 30% 45%, transparent 0%, transparent 55%, rgba(26,24,20,0.10) 100%)",
-                }}
-              />
-            </>
-          }
-        />
 
         {/* top ticker */}
         <div className="absolute top-24 left-0 right-0 z-10">
@@ -174,14 +145,9 @@ export default function AgencyHome() {
           </div>
         </div>
 
-        {/* floating editorial collage stickers — visible on md+ */}
-        <div className="hidden md:block absolute top-[28%] left-[3%] z-20 pointer-events-none">
-          <StickerBadge rotate={-9} tone="gold" size="md" className="!static !block hl-float" pulse>
-            On the cover · No.01
-          </StickerBadge>
-        </div>
 
-        <motion.div style={{ y: heroY }} className="relative z-10 max-w-[1400px] w-full mx-auto px-5 md:px-10 grid md:grid-cols-12 gap-10 items-end">
+
+        <motion.div className="relative z-10 max-w-[1400px] w-full mx-auto px-5 md:px-10 grid md:grid-cols-12 gap-10 items-end">
           <div className="md:col-span-12 lg:col-span-11">
             <motion.div
               initial={{ opacity: 0, y: 10 }}
@@ -191,7 +157,7 @@ export default function AgencyHome() {
             >
               <span className="inline-block w-10 h-px bg-[#1A1814]" />
               <span className="font-body text-[11px] tracking-[0.35em] uppercase">
-              Melbourne · Marketing & Brand
+                Melbourne · Marketing & Brand
               </span>
             </motion.div>
 
@@ -326,7 +292,7 @@ export default function AgencyHome() {
             </div>
             <div className="md:col-span-4 md:col-start-9 mt-3 md:mt-0">
               <p className="font-body text-[15.5px] md:text-[17px] leading-[1.65] text-[#1A1814]/85">
-                A glimpse behind the work — content shoots, reels, behind-the-scenes. New cuts dropped quarterly. Hit unmute on any tile to dive in.
+                A glimpse behind the work — content shoots, reels, behind-the-scenes. New cuts dropped quarterly.
               </p>
             </div>
           </div>
@@ -400,7 +366,7 @@ export default function AgencyHome() {
                   <VideoLoop
                     src={r.video}
                     poster={r.poster}
-                    controls
+                    objectPosition={r.big ? "bottom" : "center"}
                     className={`w-full ${r.big ? "aspect-[16/10]" : "aspect-[3/4]"} bg-[#1A1814]`}
                     overlay={
                       <>
@@ -748,9 +714,8 @@ export default function AgencyHome() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-60px" }}
                   transition={{ duration: 0.7, delay: i * 0.08 }}
-                  className={`${p.span} relative group overflow-hidden border border-[#1A1814]/15 ${
-                    p.accent ? "bg-[#1A1814] text-[#F2E2A4]" : "bg-[#FAF7EE] text-[#1A1814] hover:bg-[#F2E2A4] transition-colors duration-500"
-                  } p-8 md:p-10 min-h-[260px] flex flex-col justify-between`}
+                  className={`${p.span} relative group overflow-hidden border border-[#1A1814]/15 ${p.accent ? "bg-[#1A1814] text-[#F2E2A4]" : "bg-[#FAF7EE] text-[#1A1814] hover:bg-[#F2E2A4] transition-colors duration-500"
+                    } p-8 md:p-10 min-h-[260px] flex flex-col justify-between`}
                 >
                   <div className="flex items-start justify-between">
                     <span className={`hl-num text-[44px] md:text-[64px] ${p.accent ? "text-[#F2E2A4]" : ""}`}>
@@ -861,7 +826,7 @@ export default function AgencyHome() {
                 Currently on the workbench
               </div>
               <div className="relative bg-[#FAF7EE] border border-[#1A1814]/15 p-6 md:p-7 shadow-[0_18px_36px_-22px_rgba(26,24,20,0.45)]"
-                   style={{ transform: "rotate(-0.6deg)" }}>
+                style={{ transform: "rotate(-0.6deg)" }}>
                 <Thumbtack className="-top-2 left-6" />
                 <Thumbtack className="-top-2 right-6" />
                 <WashiTape tone="gold" rotate={-4} width={120} className="-top-3 left-1/2 -translate-x-1/2" />
@@ -903,7 +868,7 @@ export default function AgencyHome() {
           </div>
           <div className="relative max-w-[900px] mx-auto">
             <div className="relative bg-[#FAF7EE] border border-[#1A1814]/15 px-7 md:px-14 py-12 md:py-16 shadow-[0_30px_60px_-26px_rgba(26,24,20,0.45)]"
-                 style={{ transform: "rotate(-0.8deg)" }}>
+              style={{ transform: "rotate(-0.8deg)" }}>
               <Thumbtack className="-top-2 left-10" />
               <Thumbtack className="-top-2 right-10" />
               <WashiTape tone="gold" rotate={-7} width={130} className="-top-4 left-1/2 -translate-x-1/2" />

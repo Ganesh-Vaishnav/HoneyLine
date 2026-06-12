@@ -14,6 +14,7 @@ export const VideoLoop = ({
   overlay = null,
   controls = false,
   testId,
+  objectPosition = "center",
 }) => {
   const ref = useRef(null);
   const [ready, setReady] = useState(false);
@@ -51,9 +52,9 @@ export const VideoLoop = ({
           src={poster}
           alt=""
           aria-hidden
-          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${
-            ready ? "opacity-0" : "opacity-100"
-          }`}
+          style={{ objectPosition }}
+          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${ready ? "opacity-0" : "opacity-100"
+            }`}
         />
       )}
 
@@ -67,9 +68,9 @@ export const VideoLoop = ({
           playsInline
           preload="auto"
           onCanPlay={() => setReady(true)}
-          className={`relative w-full h-full object-cover transition-opacity duration-700 ${
-            ready ? "opacity-100" : "opacity-0"
-          }`}
+          style={{ objectPosition }}
+          className={`relative w-full h-full object-cover transition-opacity duration-700 ${ready ? "opacity-100" : "opacity-0"
+            }`}
         />
       )}
 
